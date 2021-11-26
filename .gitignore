@@ -1,0 +1,5 @@
+.idea
+configs/config.local.php
+.appenv
+vendor
+storage/logs

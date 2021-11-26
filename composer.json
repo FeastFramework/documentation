@@ -1,0 +1,18 @@
+{
+    "name": "feast/feast",
+    "description": "Feast Framework application skeleton",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Jeremy Presutti",
+            "email": "Jeremy@Presutti.us",
+            "homepage": "https://github.com/jpresutti",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1.0",
+        "feast/framework": "~v2.0"
+    }
+}
