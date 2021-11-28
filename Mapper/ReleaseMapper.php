@@ -97,7 +97,7 @@ class ReleaseMapper extends BaseMapper
     public function getReleasesForDocs(): Set
     {
         // Disable strict full_group_by, otherwise query will fail.
-        $this->connection->rawQuery('SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,\'ONLY_FULL_GROUP_BY\',\'\'));');
+        $this->connection->rawQuery('SET sql_mode=(SELECT REPLACE(@@sql_mode,\'ONLY_FULL_GROUP_BY\',\'\'));');
         return $this->fetchAll(
             $this->getQueryBase()
                 ->where('prerelease = 0')
