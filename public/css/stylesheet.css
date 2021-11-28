@@ -704,3 +704,7 @@ FEAST custom styles
 label {
     color: #fff;
 }
+
+small {
+    font-size: smaller;
+}
