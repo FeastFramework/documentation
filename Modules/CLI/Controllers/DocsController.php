@@ -25,7 +25,7 @@ class DocsController extends CliController
 
         foreach ($files as $file) {
             if (str_ends_with($file->name, '.md')) {
-                $file->html = $githubApi->getMarkdownToHtml($file->content);
+                $file->html = $githubApi->getMarkdownToHtml(utf8_decode($file->content));
                 $file->save();
             }
         }
