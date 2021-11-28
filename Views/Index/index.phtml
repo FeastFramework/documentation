@@ -23,8 +23,7 @@ $release = $this->release;
 
     <section id="main_content" class="inner">
 
-        <?php
-        echo $this->contents; ?>
+        <?= utf8_decode($this->contents); ?>
         <h2>&nbsp;</h2>
         <small>
             Powered by <a href="https://github.com/feastframework/framework">FEAST Framework</a><br />
