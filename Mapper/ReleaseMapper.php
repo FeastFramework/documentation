@@ -86,7 +86,7 @@ class ReleaseMapper extends BaseMapper
     public function fetchLatest(): ?Release
     {
         $release = $this->fetchOne(
-            $this->getQueryBase()->where('prerelease = ?', 0)->orderBy('published_at desc')->limit(1)
+            $this->getQueryBase()->where('prerelease = ?', 0)->orderBy('sortable_version desc')->limit(1)
         );
         if ($release instanceof Release) {
             return $release;

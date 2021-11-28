@@ -6,7 +6,7 @@
 
 $environments = [];
 $environments['production'] = [
-    'siteurl' => 'http://feast-framework.com',
+    'siteurl' => 'http://docs-new.feast-framework.com',
     'database.default.host' => 'localhost',
     'database.default.user' => 'prod_user',
     'database.default.pass' => 'prodPassword',
