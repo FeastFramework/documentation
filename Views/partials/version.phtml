@@ -1,0 +1,8 @@
+<label for="version-select">Version: </label>
+<select id="version-select" name="version">
+<?php
+/** @var $release \Model\Release */
+foreach ($this->releases as $release): ?>
+<option value="<?= $release->name; ?>"<?php if ( $release->name === $this->release->name ): ?> selected="selected"<?php endif; ?>><?= $release->name; ?></option>
+<?php endforeach; ?>
+</select>

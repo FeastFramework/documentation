@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<psalm
+        errorLevel="1"
+        totallyTyped="true"
+        autoloader="PsalmLoader.php"
+        reportMixedIssues="true"
+        strictBinaryOperands="true"
+        allowStringToStandInForClass="true"
+        findUnusedPsalmSuppress="true"
+        sealAllMethods="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="Model"/>
+            </errorLevel>
+        </MissingConstructor>
+        <MoreSpecificImplementedParamType>
+            <errorLevel type="suppress">
+                <directory name="Mapper"/>
+            </errorLevel>
+        </MoreSpecificImplementedParamType>
+    </issueHandlers>
+    <projectFiles>
+        <file name="scheduled_jobs.php" />
+        <file name="bootstrap.php" />
+        <file name="container.php" />
+        <directory name="configs" />
+        <directory name="Handlers" />
+        <directory name="Model" />
+        <directory name="Migrations" />
+        <directory name="Controllers" />
+        <directory name="public" />
+        <directory name="Mapper" />
+        <directory name="Services" />
+        <ignoreFiles>
+            <directory name="bin" />
+            <directory name="vendor" />
+            <file name="public/index.php" />
+        </ignoreFiles>
+        
+    </projectFiles>
+</psalm>
