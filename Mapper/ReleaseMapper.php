@@ -72,9 +72,8 @@ class ReleaseMapper extends BaseMapper
 
         // Break the version apart into major.minor.patch
         [$major, $minor,$patch] = explode('.', $release->name);
-        $subversion = '';
         if ( str_contains($patch, '-')) {
-            [$patch, $subversion] = explode('-',$patch);
+            [$patch,] = explode('-',$patch);
         }
         $dbRelease->minor_version = $major . '.' . $minor;
         $dbRelease->sortable_version = str_pad(substr($major,1),5,'0', STR_PAD_LEFT) . str_pad($minor,5,'0', STR_PAD_LEFT). str_pad($patch,5,'0', STR_PAD_LEFT);
