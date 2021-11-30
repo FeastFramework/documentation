@@ -27,7 +27,6 @@ class Request extends Service
     public function getLatestRelease(): Release {
         $this->httpRequest->get('https://api.github.com/repos/feastframework/framework/releases/latest');
         $this->httpRequest->makeRequest();
-//        var_dump($this->httpRequest->getResponseAsString());
         $release = new Release();
         Json::unmarshal($this->httpRequest->getResponseAsString(),$release);
         return $release;
