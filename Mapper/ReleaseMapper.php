@@ -95,14 +95,24 @@ class ReleaseMapper extends BaseMapper
 
     public function getReleasesForDocs(): Set
     {
-        // Disable strict full_group_by, otherwise query will fail.
-        $this->connection->rawQuery('SET sql_mode=(SELECT REPLACE(@@sql_mode,\'ONLY_FULL_GROUP_BY\',\'\'));');
-        return $this->fetchAll(
+        $currentVersion = null;
+        $items = [];
+        $releases = $this->fetchAll(
             $this->getQueryBase()
                 ->where('prerelease = 0')
-                ->groupBy('minor_version')
                 ->orderBy('sortable_version desc')
         );
+        
+        /** @var Release $release */
+        foreach($releases as $release) {
+            if ( $release->minor_version === $currentVersion ) {
+                continue;
+            }
+            $items[] = $release;
+            $currentVersion = $release->minor_version;
+        }
+
+        return new Set(self::class,$items,preValidated: true);
     }
 
 }
