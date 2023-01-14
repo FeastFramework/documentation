@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\CLI\Controllers;
 
+use Exception\GithubException;
 use Feast\Attributes\Action;
 use Feast\CliController;
 use Feast\Interfaces\ConfigInterface;
@@ -41,9 +42,12 @@ class ReleaseController extends CliController
         FilesToReleaseMapper $filesToReleaseMapper
     ): void {
         $githubApi = new Github\Request($config);
-
-        $releases = $githubApi->getReleases();
-
+        try {
+            $releases = $githubApi->getReleases();
+        } catch(GithubException $exception) {
+            $this->displayGithubError($exception);
+            return;
+        }
         /** @var Github\Responses\Release $release */
         foreach ($releases->releases as $release) {
             $dbRelease = $releaseMapper->saveFromGithub($release);
@@ -58,8 +62,12 @@ class ReleaseController extends CliController
         FileMapper $fileMapper,
         FilesToReleaseMapper $filesToReleaseMapper
     ): void {
-        $docs = $githubApi->getDocsForRelease($release->tagName);
-
+        try {
+            $docs = $githubApi->getDocsForRelease($release->tagName);
+        } catch(GithubException $exception) {
+            $this->displayGithubError($exception);
+            return;
+        }
         foreach ($docs->files as $file) {
             if (str_ends_with($file->name, '.md') === false) {
                 continue;
@@ -87,6 +95,24 @@ class ReleaseController extends CliController
                 $fileMapped->release_id = $dbRelease->release_id;
                 $fileMapped->save();
             }
+        }
+    }
+
+    protected function displayGithubError(GithubException $exception): void
+    {
+        $message = $exception->getErrorMessage();
+        $documentationUrl = $exception->getDocumentationUrl();
+        if ($message) {
+            $this->terminal->error('Error fetching documentation from Github. The error information from Github is below.');
+            $this->terminal->message('');
+            $this->terminal->command('Error: ' . $message);
+            if ($documentationUrl !== null) {
+                $this->terminal->command('Documentation: ' . $documentationUrl);
+            }
+            $this->terminal->message('');
+            $this->terminal->error('Check the README.md file for info on setting up Github Personal Access tokens.');
+        } else {
+            $this->terminal->error('Unknown error occured while fetching documentation from Github.');
         }
     }
 

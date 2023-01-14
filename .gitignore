@@ -4,3 +4,4 @@ configs/config.local.php
 vendor
 storage/logs
 cache/*
+public/.well-known

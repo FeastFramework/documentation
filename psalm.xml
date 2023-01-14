@@ -33,6 +33,7 @@
         <directory name="Model" />
         <directory name="Migrations" />
         <directory name="Controllers" />
+        <directory name="Exception" />
         <directory name="public" />
         <directory name="Mapper" />
         <directory name="Services" />

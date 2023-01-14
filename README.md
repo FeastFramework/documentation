@@ -10,6 +10,13 @@ well as migrations. Additionally, an on-disk cache can be used to save database 
 
 # Getting started
 
+### Github Personal access token
+
+A Github Personal access token is required to avoid rate limiting for fetching documentation. You can find the
+documentation [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+Once you have generated a token (with no special permissions required), you are ready to configure the application.
+
 ## Configuring the application
 
 In order to use this project locally (which will allow you to self-host the docs), first
@@ -49,7 +56,9 @@ To cache the documentation application run `php famine cache:cache-all` or you c
 See `php famine cache:cache` for more details.
 
 ## Browsing the source
+
 The following folders contain files that are used by the documentation application:
+
 1. `configs`
 2. `Controllers`
 3. `Mapper`
